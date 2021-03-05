@@ -66,7 +66,7 @@ app.get('/eagletrt/telemetria/info', (_req, res) => {
 
 logger.debug('POST /eagletrt/telemetria/info');
 app.post('/eagletrt/telemetria/info', (req, res) => {
-    const newData = {
+    let newData = {
         ngrokUrl: req.body.ngrokUrl,
         localIp: req.body.localIp,
         publicIp: req.body.publicIp,
