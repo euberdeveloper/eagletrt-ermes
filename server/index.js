@@ -18,19 +18,31 @@ const app = express();
 let data = {
     localIp: null,
     publicIp: null,
-    ngrokUrl: null,
+    ngrokUrl: 'tcp://0.tcp.ap.ngrok.io:18480',
     date: null
 };
 
 function handleCheckErrorString(str, name) {
     let message = null;
-    
+
     if (typeof str !== 'string' || !str) {
         message = `${name} must be a non-empty string`;
         logger.error(message);
     }
-    
+
     return message;
+}
+
+function getHostnameAndPort(url) {
+    let result = { hostname: null, port: null };
+
+    if (url) {
+        const regexp = /^tcp:\/\/(?<hostname>[\w\.]+):(?<port>\d+)$/;
+        const match = url.match(regexp);
+        result = match?.groups ?? result;
+    }
+
+    return result;
 }
 
 // MIDDLEWARES
@@ -72,16 +84,16 @@ app.post('/eagletrt/telemetria/info', (req, res) => {
         publicIp: req.body.publicIp,
         date: new Date()
     };
-    
+
     for (const param of Object.keys(newData).filter(k => k !== 'date')) {
         const message = handleCheckErrorString(newData[param], param);
         if (message) {
             return res.status(400).send(message);
         }
     }
-    
+
     data = newData;
-    
+
     return res.send();
 });
 
@@ -102,7 +114,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 logger.debug('Add main frontend route');
 app.get('/', (_req, res) => {
-    res.render('home', data);
+    res.render('home', { ...data, ...getHostnameAndPort(data.ngrokUrl) });
 })
 
 // LISTEN
