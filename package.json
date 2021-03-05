@@ -1,0 +1,20 @@
+{
+  "name": "eagletrt-telemetria-ip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eagletrt/eagletrt-telemetria-ip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eagletrt/eagletrt-telemetria-ip/issues"
+  },
+  "homepage": "https://github.com/eagletrt/eagletrt-telemetria-ip#readme"
+}
