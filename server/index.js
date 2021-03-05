@@ -22,14 +22,15 @@ const data = {
     date: null
 };
 
-function handleCheckErrorString(res, str, name) {
+function handleCheckErrorString(str, name) {
+    let message = null;
+    
     if (typeof str !== 'string' || !str) {
-        const message = `${name} must be a non-empty string`;
+        message = `${name} must be a non-empty string`;
         logger.error(message);
-        res.status(400).send(message)
-        return false
     }
-    return true
+    
+    return message;
 }
 
 // MIDDLEWARES
@@ -65,22 +66,23 @@ app.get('/eagletrt/telemetria/info', (_req, res) => {
 
 logger.debug('POST /eagletrt/telemetria/info');
 app.post('/eagletrt/telemetria/info', (req, res) => {
-    const ngrokUrl = req.body.ngrokUrl;
-    const localIp = req.body.localIp;
-    const publicIp = req.body.publicIp;
+    const newData = {
+        ngrokUrl: req.body.ngrokUrl,
+        localIp: req.body.localIp,
+        publicIp: req.body.publicIp,
+        date: new Date()
+    };
     
-    if (!handleCheckErrorString(res, ngrokUrl, 'Ngrok Url') ||
-        !handleCheckErrorString(res, localIp, 'Local IP') ||
-        !handleCheckErrorString(res, publicIp, 'Public IP')
-    ) {
-        return;
+    for (const param of Object.keys(newData).filter(k => k === 'date')) {
+        const message = handleCheckErrorString(newData[param], param);
+        if (message) {
+            return res.status(400).send(message);
+        }
     }
     
-    data.ngrokUrl = ngrokUrl;
-    data.localIp = localIp;
-    data.publicIp = publicIp;
-    data.date = new Date();
-    res.send()
+    data = newData();
+    
+    return res.send();
 });
 
 logger.success('Routes added');
