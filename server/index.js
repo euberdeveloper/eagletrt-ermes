@@ -14,7 +14,7 @@ const app = express();
 // DATA
 
 const data = {
-    port: null,
+    address: null,
     date: null
 };
 
@@ -44,22 +44,23 @@ logger.hr();
 
 logger.info('Add routes...');
 
-logger.debug('GET /eagletrt/telemetria/port');
-app.get('/eagletrt/telemetria/port', (_req, res) => {
+logger.debug('GET /eagletrt/telemetria/address');
+app.get('/eagletrt/telemetria/address', (_req, res) => {
     res.send(data);
 });
 
-logger.debug('POST /eagletrt/telemetria/port');
-app.post('/eagletrt/telemetria/port', (req, res) => {
-    const { port } = req.body.port;
+logger.debug('POST /eagletrt/telemetria/address');
+app.post('/eagletrt/telemetria/address', (req, res) => {
+    const address = req.body.address;
+    console.log(address);
 
-    if (typeof port !== 'string' || !port) {
-        const message = 'Port must be a non-empty string';
+    if (typeof address !== 'string' || !address) {
+        const message = 'Address must be a non-empty string';
         logger.error(message);
         res.status(400).send(message)
     }
     else {
-        data.port = port;
+        data.address = address;
         data.date = new Date();
         res.send();
     }

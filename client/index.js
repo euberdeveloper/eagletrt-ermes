@@ -7,16 +7,16 @@ const logger = new Logger();
 async function getPort() {
     try {
         const response = await axios.get(GET_PORT_URL);
-        return response.data;
+        return response.data['tunnels'][0]['public_url'];
     }
     catch (error) {
         logger.error('Error in getting port', error);
     }
 }
 
-async function sendPort(port) {
+async function sendPort(address) {
     try {
-        await axios.post(POST_PORT_URL, { port });
+        await axios.post(POST_PORT_URL, { address });
     }
     catch (error) {
         logger.error('Error in sending port', error);
@@ -26,9 +26,9 @@ async function sendPort(port) {
 async function main() {
     setInterval(async () => {
         logger.info('Getting port', (new Date()).toISOString());
-        const port = await getPort();
+        const address = await getPort();
         logger.info('Sending port', (new Date()).toISOString());
-        await sendPort(port);
+        await sendPort(address);
     }, RATE_IN_MILLISECONDS);
 }
 
