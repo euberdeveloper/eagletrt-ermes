@@ -80,7 +80,7 @@ app.post('/eagletrt/telemetria/info', (req, res) => {
         }
     }
     
-    data = newData();
+    data = newData;
     
     return res.send();
 });
