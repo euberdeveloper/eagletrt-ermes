@@ -73,7 +73,9 @@ logger.info('Add routes...');
 
 logger.debug('GET /eagletrt/telemetria/info');
 app.get('/eagletrt/telemetria/info', (_req, res) => {
-    res.send({ ...data, ...getHostnameAndPort(data.ngrokUrl) });
+    const hostAndPort = getHostnameAndPort(data.ngrokUrl);
+    const ssh = hostAndPort.hostname && hostAndPort.port ? `ssh ubuntu@${hostname} -p ${port}` : null;
+    res.send({ ...data, ...hostAndPort, ssh });
 });
 
 logger.debug('POST /eagletrt/telemetria/info');
@@ -114,7 +116,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 logger.debug('Add main frontend route');
 app.get('/', (_req, res) => {
-    res.render('home', { ...data, ...getHostnameAndPort(data.ngrokUrl) });
+    const hostAndPort = getHostnameAndPort(data.ngrokUrl);
+    const ssh = hostAndPort.hostname && hostAndPort.port ? `ssh ubuntu@${hostname} -p ${port}` : null;
+    res.render('home', { ...data, ...hostAndPort, ssh });
 })
 
 // LISTEN
