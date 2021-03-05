@@ -73,7 +73,7 @@ app.post('/eagletrt/telemetria/info', (req, res) => {
         date: new Date()
     };
     
-    for (const param of Object.keys(newData).filter(k => k === 'date')) {
+    for (const param of Object.keys(newData).filter(k => k !== 'date')) {
         const message = handleCheckErrorString(newData[param], param);
         if (message) {
             return res.status(400).send(message);
