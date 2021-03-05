@@ -78,10 +78,15 @@ logger.info('Setting forntend');
 
 logger.debug('Set handlebars as view engine');
 app.set('view engine', 'handlebars');
-app.engine('handlebars', handlebars());
+app.engine('handlebars', handlebars({ extname: '.hbs', defaultLayout: null }));
 
 logger.debug('Expose static content');
 app.use(express.static(path.join(__dirname, 'public')));
+
+logger.debug('Add main frontend route');
+app.get('/', (_req, res) => {
+    res.render('home', data);
+})
 
 // LISTEN
 
