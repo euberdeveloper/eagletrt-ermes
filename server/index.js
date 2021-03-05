@@ -73,7 +73,7 @@ logger.info('Add routes...');
 
 logger.debug('GET /eagletrt/telemetria/info');
 app.get('/eagletrt/telemetria/info', (_req, res) => {
-    res.send(data);
+    res.send({ ...data, ...getHostnameAndPort(data.ngrokUrl) });
 });
 
 logger.debug('POST /eagletrt/telemetria/info');
