@@ -15,7 +15,7 @@ const app = express();
 
 // DATA
 
-const data = {
+let data = {
     localIp: null,
     publicIp: null,
     ngrokUrl: null,
@@ -66,7 +66,7 @@ app.get('/eagletrt/telemetria/info', (_req, res) => {
 
 logger.debug('POST /eagletrt/telemetria/info');
 app.post('/eagletrt/telemetria/info', (req, res) => {
-    let newData = {
+    const newData = {
         ngrokUrl: req.body.ngrokUrl,
         localIp: req.body.localIp,
         publicIp: req.body.publicIp,
