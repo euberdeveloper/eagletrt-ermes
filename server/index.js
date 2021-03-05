@@ -3,6 +3,8 @@ const compression = require('compression');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
+const path = require('path');
+const handlebars = require('express-handlebars');
 
 const { Logger } = require('euberlog');
 const logger = new Logger();
@@ -69,6 +71,22 @@ app.post('/eagletrt/telemetria/address', (req, res) => {
 logger.success('Routes added');
 
 logger.hr();
+
+// FRONTEND
+
+logger.info('Setting forntend');
+
+logger.debug('Set handlebars as view engine');
+app.set('view engine', 'handlebars');
+app.engine('handlebars', handlebars({ extname: '.hbs', defaultLayout: null }));
+
+logger.debug('Expose static content');
+app.use(express.static(path.join(__dirname, 'public')));
+
+logger.debug('Add main frontend route');
+app.get('/', (_req, res) => {
+    res.render('home', data);
+})
 
 // LISTEN
 
