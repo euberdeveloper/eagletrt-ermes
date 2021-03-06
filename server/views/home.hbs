@@ -1,14 +1,114 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>EagleTRT - telemetria IP</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link rel="stylesheet" href="/public/home.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
 </head>
+
 <body>
-    L'indirizzo locale è {{localIp}} {{publicIp}} {{ngrokUrl}} <br>
-    La data è {{date}} <br>
-    Hostname and port {{hostname}} {{port}}
+    <h2>Eagletrt project</h2>
+    <img src="/public/logo.png" id="logo">
+    <div id="copyarea">
+        <table>
+            <tr>
+                <th>
+                    <h1>
+                        Local Ip
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="localIp">
+                        {{localIp}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyLocalIp" class="copy" data-clipboard-target="#localIp">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Public Ip
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="publicIp">
+                        {{publicIp}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyPublicIp" class="copy" data-clipboard-target="#publicIp">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        NgrokUrl
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="ngrokUrl">
+                        {{ngrokUrl}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyNgrokUrl" class="copy" data-clipboard-target="#ngrokUrl">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Date
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="date">
+                        {{date}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyDate" class="copy" data-clipboard-target="#date">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Hostname
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="hostname">
+                        {{hostname}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyHostname" class="copy" data-clipboard-target="#hostname">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Port
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="port">
+                        {{port}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyPort" class="copy" data-clipboard-target="#port">
+                </th>
+            </tr>
+        </table>
+    </div>
+    <script>new ClipboardJS('.copy');</script>
+    <script src="/public/home.js"></script>
 </body>
+
 </html>
