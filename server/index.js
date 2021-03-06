@@ -18,7 +18,7 @@ const app = express();
 let data = {
     localIp: null,
     publicIp: null,
-    ngrokUrl: 'tcp://0.tcp.ap.ngrok.io:18480',
+    ngrokUrl: null,
     date: null
 };
 
