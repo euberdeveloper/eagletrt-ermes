@@ -118,7 +118,8 @@ logger.debug('Add main frontend route');
 app.get('/', (_req, res) => {
     const { hostname, port } = getHostnameAndPort(data.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    res.render('home', { ...data, hostname, port, ssh });
+    const date = data.date ? data.date.toLocaleString() : null;
+    res.render('home', { ...data, date, hostname, port, ssh });
 })
 
 // LISTEN
