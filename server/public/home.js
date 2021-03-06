@@ -1,14 +1,14 @@
-'use strict';
+var clipboard = new ClipboardJS('.copy');
 
-function copy(type) {
-    var input = document.createElement('input');
-    var element = document.getElementById(type);
-    input.setAttribute('value', port_number);
-    document.body.appendChild(input);
-    input.select();
-    var risultato = document.execCommand('copy');
-    document.body.removeChild(input);
-    alert(type + ' copiato: ' + element);
-    return risultato;
-}
+clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
 
+    e.clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
