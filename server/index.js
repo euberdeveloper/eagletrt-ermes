@@ -112,7 +112,7 @@ app.engine('hbs', handlebars({ extname: '.hbs', defaultLayout: null }));
 app.set('view engine', 'hbs');
 
 logger.debug('Expose static content');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 logger.debug('Add main frontend route');
 app.get('/', (_req, res) => {
