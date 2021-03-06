@@ -7,7 +7,6 @@
     }
 }
 
-
 html, body {
     margin: 0;
     padding: 0;
@@ -34,6 +33,7 @@ h1#title {
     font-size: 3em;
     text-align: center;
 }
+
 h2#subtitle {
     margin-top: 2px;
     margin-bottom: 24px;
@@ -41,6 +41,7 @@ h2#subtitle {
     font-size: 3em;
     text-align: center;
 }
+
 #logo {
     width: 250px;
     margin: 36px 0;
@@ -95,6 +96,15 @@ h2#subtitle {
 
 #copyarea>.item>.copy>img:hover {
     box-shadow: 0 0 5px #ffffff;
+}
+
+#last-update {
+    flex: 1;
+    
+    text-align: center;
+    color: #c0c0c0;
+    font-size: 1.3em;
+    font-style: italic;
 }
 
 @media (max-width: 1500px) {
