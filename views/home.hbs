@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="../public/home.css">
+</head>
+<body>
+    <h2>Eagletrt project</h2>
+    <img src="../public/logo.png" id="logo">
+    <div id="copyarea">
+        <table>
+            <tr>
+                <th>
+                    <h1>
+                        Local Ip
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="localIp">
+                        {{localIp}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyLocalIp" onclick="copy(localIp)">    
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Public Ip
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="publicIp">
+                        {{publicIp}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyPublicIp" onclick="copy(publicIp)">    
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        NgrokUrl
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="ngrokUrl">
+                        {{ngrokUrl}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyNgrokUrl" onclick="copy(ngrokUrl)">    
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Date
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="date">
+                        {{date}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyDate" onclick="copy(date)">    
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Hostname
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="hostname">
+                        {{hostname}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyHostname" onclick="copy(hostname)">    
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h1>
+                        Port
+                    </h1>
+                </th>
+                <th>
+                    <h1 id="port">
+                        {{port}}
+                    </h1>
+                </th>
+                <th>
+                    <input type="button" id="copyPort" onclick="copy(port)">    
+                </th>
+            </tr>
+        </table>
+    </div>
+    <script src="../public/home.js"></script>   
+</body>
+</html>

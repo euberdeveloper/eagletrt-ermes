@@ -1,0 +1,40 @@
+body{
+    background-color: #1c1d20;
+}
+
+
+#logo{
+    width: 20vw;
+    position: fixed;
+    top: 5vw;
+    left: 40vw;
+}
+
+#copyarea{
+    border-radius: 1vw;
+    background-color: #101010;
+    text-align: center;
+    color: #c0c0c0;
+    font-size: 0.5vw;
+    position: fixed;
+    top: 25vw;
+    left: 35vw;
+}
+
+th {
+    width: 10vw;
+}
+
+h2{
+    color: #e0b010;
+    text-align: center;
+    font-size: 3vw;
+}
+
+input{
+    background-image: url('copy.png');
+    background-size: cover;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 0.3vw;
+}
