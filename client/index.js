@@ -38,7 +38,7 @@ async function getPublicIP() {
 function getLocalIP() {
     const nets = networkInterfaces();
     const results = {}; // Or just '{}', an empty object
-    
+
     for (const name of Object.keys(nets)) {
         for (const net of nets[name]) {
             // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
@@ -51,12 +51,12 @@ function getLocalIP() {
         }
     }
     if (results["wlan0"] && results["wlan0"].length > 0) {
-        return results["wlan0"][0]
+        return results["wlan0"][0];
     }
     if (results["eth0"] && results["eth0"].length > 0) {
-        return results["eth0"][0]
+        return results["eth0"][0];
     }
-    return ""
+    return "";
 }
 
 async function sendData(ngrokUrl, localIp, publicIp) {
