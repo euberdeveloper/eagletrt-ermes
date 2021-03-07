@@ -108,11 +108,12 @@ app.get('/api/machines/:machine/:field', (req, res) => {
     if (!machineData) {
         return res.status(404).send('Machine not found');
     }
-    else if (!(field in machineData)) {
-        return res.status(400).send('Invalid field');
-    }
 
     const parsedMachineData = parseMachineData(machineData);
+    if (!(field in parsedMachineData)) {
+        return res.status(400).send('Invalid field');
+    }
+    
 
     res.send(parsedMachineData[field]);
 });
