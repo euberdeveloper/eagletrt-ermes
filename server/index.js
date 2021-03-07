@@ -155,7 +155,7 @@ logger.hr();
 
 logger.debug('GET /');
 app.get('/shish', (_req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'shell', 'shi.sh'));
+    res.download(path.join(__dirname, '..', 'shell', 'shi.sh'), 'shi.sh');
 });
 
 // FRONTEND
