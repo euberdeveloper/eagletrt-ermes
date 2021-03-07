@@ -18,8 +18,8 @@ const app = express();
 let data = {};
 
 function parseMachineData(machineData, adjustDate = false) {
-    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
-    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
+    const { hostname, port, user } = getHostnameAndPort(machineData.ngrokUrl);
+    const ssh = hostname && port && user ? `ssh ${user}@${hostname} -p ${port}` : null;
     const date = adjustDate ? machineData.date.toLocaleString() : machineData.date;
     return { ...machineData, date, hostname, port, ssh };
 }
