@@ -1,7 +1,17 @@
 const axios = require('axios');
 const { networkInterfaces } = require('os');
 const { Logger } = require('euberlog');
-const { RATE_IN_MILLISECONDS, GET_PORT_URL, POST_PORT_URL, GET_PUBLIC_IP_URL } = require('./config');
+
+function requireConfig() {
+    try {
+        return config = require('./config');
+    }
+    catch (error) {
+        return require('./config.default');
+    }
+}
+
+const { RATE_IN_MILLISECONDS, GET_PORT_URL, POST_PORT_URL, GET_PUBLIC_IP_URL } = requireConfig();
 
 const logger = new Logger();
 
