@@ -166,7 +166,7 @@ app.get('/', (_req, res) => {
     if (!machineData) {
         res.status(404).send('Machine "telemetria" not found');
     }
-    res.render('home', parseMachineData(machineData));
+    res.render('home', parseMachineData(machineData, true));
 });
 
 logger.debug('GET /:machine');
@@ -182,7 +182,7 @@ app.get('/:machine', (req, res) => {
         res.status(404).send('Machine not found');
     }
 
-    res.render('home', parseMachineData(machineData));
+    res.render('home', parseMachineData(machineData, true));
 });
 
 // LISTEN
