@@ -165,6 +165,10 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 logger.debug('GET /');
 app.get('/', (_req, res) => {
     const machineData = data.telemetria;
+    if (!machineData) {
+        res.status(404).send('Machine "telemetria" not found');
+    }
+
     const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
     const date = machineData.date ? machineData.date.toLocaleString() : null;
