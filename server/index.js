@@ -17,13 +17,11 @@ const app = express();
 
 let data = {};
 
-function getEmptyMachineData() {
-    return {
-        localIp: null,
-        publicIp: null,
-        ngrokUrl: null,
-        date: null
-    };
+function parseMachineData(machineData, adjustDate = false) {
+    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
+    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
+    const date = adjustDate ? machineData.date : machineData.date.toLocaleString();
+    return { ...machineData, date, hostname, port, ssh };
 }
 
 function handleCheckErrorString(str, name) {
@@ -94,9 +92,7 @@ app.get('/api/machines/:machine', (req, res) => {
         return res.status(404).send('Machine not found');
     }
 
-    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
-    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    res.json({ ...machineData, hostname, port, ssh });
+    res.json(parseMachineData(machineData));
 });
 
 logger.debug('GET /api/machines/:machine/:field');
@@ -116,7 +112,9 @@ app.get('/api/machines/:machine/:field', (req, res) => {
         return res.status(400).send('Invalid field');
     }
 
-    res.send(machineData[field]);
+    const parsedMachineData = parseMachineData(machineData);
+
+    res.send(parsedMachineData[field]);
 });
 
 logger.debug('POST /api/machines/:machine');
@@ -168,11 +166,7 @@ app.get('/', (_req, res) => {
     if (!machineData) {
         res.status(404).send('Machine "telemetria" not found');
     }
-
-    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
-    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    const date = machineData.date ? machineData.date.toLocaleString() : null;
-    res.render('home', { ...machineData, date, hostname, port, ssh });
+    res.render('home', parseMachineData(machineData));
 });
 
 logger.debug('GET /:machine');
@@ -188,10 +182,7 @@ app.get('/:machine', (req, res) => {
         res.status(404).send('Machine not found');
     }
 
-    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
-    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    const date = machineData.date ? machineData.date.toLocaleString() : null;
-    res.render('home', { ...machineData, date, hostname, port, ssh });
+    res.render('home', parseMachineData(machineData));
 });
 
 // LISTEN
