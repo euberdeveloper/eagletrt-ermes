@@ -15,12 +15,16 @@ const app = express();
 
 // DATA
 
-let data = {
-    localIp: null,
-    publicIp: null,
-    ngrokUrl: null,
-    date: null
-};
+let data = {};
+
+function getEmptyMachineData() {
+    return {
+        localIp: null,
+        publicIp: null,
+        ngrokUrl: null,
+        date: null
+    };
+}
 
 function handleCheckErrorString(str, name) {
     let message = null;
@@ -71,15 +75,40 @@ logger.hr();
 
 logger.info('Add routes...');
 
-logger.debug('GET /eagletrt/telemetria/info');
-app.get('/eagletrt/telemetria/info', (_req, res) => {
-    const { hostname, port } = getHostnameAndPort(data.ngrokUrl);
-    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    res.send({ ...data, hostname, port, ssh });
+logger.debug('GET /eagletrt/machines');
+app.get('/eagletrt/machines', (_req, res) => {
+    res.send(Object.keys(data));
 });
 
-logger.debug('POST /eagletrt/telemetria/info');
-app.post('/eagletrt/telemetria/info', (req, res) => {
+logger.debug('GET /eagletrt/:machine/info');
+app.get('/eagletrt/:machine/info', (req, res) => {
+    const { machine } = req.params;
+
+    const errorMessage = handleCheckErrorString(machine, param);
+    if (errorMessage) {
+        return res.status(400).send(errorMessage);
+    }
+
+    const machineData = data.machine;
+    if (!machineData) {
+        machineData = getEmptyMachineData();
+        data.machine = machineData;
+    }
+
+    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
+    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
+    res.send({ ...machineData, hostname, port, ssh });
+});
+
+logger.debug('POST /eagletrt/:machine/info');
+app.post('/eagletrt/:machine/info', (req, res) => {
+    const { machine } = req.params;
+
+    const errorMessage = handleCheckErrorString(machine, param);
+    if (errorMessage) {
+        return res.status(400).send(errorMessage);
+    }
+
     const newData = {
         ngrokUrl: req.body.ngrokUrl,
         localIp: req.body.localIp,
@@ -94,7 +123,7 @@ app.post('/eagletrt/telemetria/info', (req, res) => {
         }
     }
 
-    data = newData;
+    data[machine] = newData;
 
     return res.send();
 });
@@ -116,6 +145,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 logger.debug('Add main frontend route');
 app.get('/', (_req, res) => {
+    const data = data.telemetria;
     const { hostname, port } = getHostnameAndPort(data.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
     const date = data.date ? data.date.toLocaleString() : null;
