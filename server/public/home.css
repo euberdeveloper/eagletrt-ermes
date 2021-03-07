@@ -138,6 +138,7 @@ h2#subtitle {
     }
     #copyarea {
         padding: 20px 0;
+        margin-top: 20px;
     }
     #copyarea>.item {
         margin: 12px 0;
