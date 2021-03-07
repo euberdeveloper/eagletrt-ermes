@@ -69,6 +69,7 @@ In particular the **POST** body is something such as:
 ```
 
 While the result of a **GET**:
+```json
 {
     "ngrokUrl": "tcp://hostname:1234",
     "host": "hostname",
@@ -78,3 +79,10 @@ While the result of a **GET**:
     "publicIp": "340.650.1.1",
     "user": "ubuntu"
 }
+```
+
+The **shell** script is also served by the `/shish` api call.
+
+### Usage
+
+There is a [shell script](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shi.sh) that calls the api and executes automatically the shell command.
