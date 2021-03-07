@@ -1,40 +1,142 @@
-body{
-    background-color: #1c1d20;
+@keyframes clock {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-
-#logo{
-    width: 20vw;
-    position: fixed;
-    top: 5vw;
-    left: 40vw;
+html, body {
+    margin: 0;
+    padding: 0;
 }
 
-#copyarea{
-    border-radius: 1vw;
+body {
+    background: #1c1d20;
+}
+
+#content {
+    width: 60vw;
+    min-height: 100vh;
+    margin: 0 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1#title {
+    margin-top: 24px;
+    margin-bottom: 5px;
+    color: #e0b010;
+    font-size: 3em;
+    text-align: center;
+}
+
+h2#subtitle {
+    margin-top: 2px;
+    margin-bottom: 24px;
+    color: #36bf2d;
+    font-size: 3em;
+    text-align: center;
+}
+
+#logo {
+    width: 250px;
+    margin: 36px 0;
+    animation: clock 7s infinite;
+}
+
+#copyarea {
+    width: 100%;
+    margin: 25px;
+    padding: 20px;
+    border-radius: 25px;
     background-color: #101010;
+    display: flex;
+    flex-direction: column;
+}
+
+#copyarea>.item {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#copyarea>.item>.title {
+    flex: 1;
+    margin-left: 36px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+#copyarea>.item>.value {
+    flex: 2.5;
+    font-size: 1.3em;
+    color: #c0c0c0;
+    text-align: center;
+}
+
+#copyarea>.item>.copy {
+    flex: 1;
+    margin-right: 36px;
+    text-align: end;
+}
+
+#copyarea>.item>.copy>img {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    transition: box-shadow 300ms;
+}
+
+#copyarea>.item>.copy>img:hover {
+    box-shadow: 0 0 5px #ffffff;
+}
+
+#last-update {
+    flex: 1;
+    
     text-align: center;
     color: #c0c0c0;
-    font-size: 0.5vw;
-    position: fixed;
-    top: 25vw;
-    left: 35vw;
+    font-size: 1.3em;
+    font-style: italic;
 }
 
-th {
-    width: 10vw;
+@media (max-width: 1500px) {
+    #content {
+        width: 70vw;
+        margin: 0 15vw;
+    }
 }
 
-h2{
-    color: #e0b010;
-    text-align: center;
-    font-size: 3vw;
+@media (max-width: 1000px) {
+    #content {
+        width: 80vw;
+        margin: 0 10vw;
+    }
 }
 
-input{
-    background-image: url('copy.png');
-    background-size: cover;
-    width: 2vw;
-    height: 2vw;
-    border-radius: 0.3vw;
+@media (max-width: 720px) {
+    #content {
+        width: 95vw;
+        min-height: 100vh;
+        margin: 0 2.5vw;
+    }
+    #copyarea {
+        padding: 20px 0;
+    }
+    h1#title {
+        font-size: 2.2em;
+    }
+    h2#subtitle {
+        font-size: 2.2em;
+    }
+    #logo {
+        width: 200px;
+    }
 }

@@ -4,16 +4,82 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>EagleTRT - telemetria IP</title>
+    <title>EagleTRT - telemetria info</title>
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <link rel="stylesheet" href="/public/home.css" />
+    <link rel=icon href="/public/favicon.ico">
     <script src="/public/clipboard.min.js"></script>
 </head>
 
 <body>
-    <h2>Eagletrt project</h2>
-    <img src="/public/logo.png" id="logo">
-    <div id="copyarea">
+    <div id="content">
+        <h1 id="title">ET (Eagle Telemetria)</h1>
+        <h2 id="subtitle">Telefono Casa</h2>
+        <img src="/public/logo.png" alt="logo" id="logo">
+        <div id="copyarea">
+            <!-- LOCAL IP -->
+            <div class="item local-ip">
+                <span class="title">Local IP</span>
+                <span class="value clipboardjs" data-clipboard-target="#local-ip">{{localIp}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="copy" />
+                </span>
+            </div>
+
+            <!-- PUBLIC IP -->
+            <div class="item public-ip">
+                <span class="title">Public IP</span>
+                <span class="value clipboardjs" data-clipboard-target="#public-ip">{{publicIp}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="copy" />
+                </span>
+            </div>
+
+            <!-- NGROK URL -->
+            <div class="item ngrok-url">
+                <span class="title">Ngrok Url</span>
+                <span class="value clipboardjs" data-clipboard-target="#ngrok-url">{{ngrokUrl}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="copy" />
+                </span>
+            </div>
+
+            <!-- HOSTNAME -->
+            <div class="item hostname">
+                <span class="title">Hostname</span>
+                <span class="value clipboardjs" data-clipboard-target="#hostname">{{hostname}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="copy" />
+                </span>
+            </div>
+
+            <!-- PORT -->
+            <div class="item port">
+                <span class="title">Port</span>
+                <span class="value clipboardjs" data-clipboard-target="#port">{{port}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="copy" />
+                </span>
+            </div>
+
+            <!-- SSH -->
+            <div class="item ssh">
+                <span class="title">SSH</span>
+                <span class="value clipboardjs" data-clipboard-target="#ssh">{{ssh}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="copy" />
+                </span>
+            </div>
+
+            <!-- LAST UPDATE -->
+            <div class="item last-update">
+                <span id="last-update">Last updated on {{date}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    {{!-- <div id="copyarea">
         <table>
             <tr>
                 <th>
@@ -121,7 +187,7 @@
                 </th>
             </tr>
         </table>
-    </div>
+    </div> --}}
     <script src="/public/home.js"></script>
 </body>
 

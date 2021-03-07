@@ -1,4 +1,4 @@
-var clipboard = new ClipboardJS('.copy');
+var clipboard = new ClipboardJS('.clipboardjs');
 
 clipboard.on('success', function(e) {
     console.info('Action:', e.action);
@@ -6,6 +6,8 @@ clipboard.on('success', function(e) {
     console.info('Trigger:', e.trigger);
 
     e.clearSelection();
+
+    alert('Copied text');
 });
 
 clipboard.on('error', function(e) {
