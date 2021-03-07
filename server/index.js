@@ -177,7 +177,7 @@ app.get('/', (_req, res) => {
 
 logger.debug('GET /:machine');
 app.get('/:machine', (req, res) => {
-    const { machine } = req.query;
+    const { machine } = req.params;
     const errorMessage = handleCheckErrorString(machine, 'machine');
     if (errorMessage) {
         return res.status(400).send(errorMessage);
