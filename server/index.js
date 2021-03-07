@@ -184,6 +184,10 @@ app.get('/:machine', (req, res) => {
     }
 
     const machineData = data[machine];
+    if (!machineData) {
+        res.status(404).send('Machine not found');
+    }
+
     const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
     const date = machineData.date ? machineData.date.toLocaleString() : null;
