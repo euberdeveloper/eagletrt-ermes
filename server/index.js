@@ -17,8 +17,21 @@ const app = express();
 
 let data = {};
 
+function getHostnameAndPort(url) {
+    let result = { hostname: null, port: null };
+
+    if (url) {
+        const regexp = /^tcp:\/\/(?<hostname>[\w\.]+):(?<port>\d+)$/;
+        const match = url.match(regexp);
+        result = match?.groups ?? result;
+    }
+
+    return result;
+}
+
 function parseMachineData(machineData, adjustDate = false) {
-    const { hostname, port, user } = getHostnameAndPort(machineData.ngrokUrl);
+    const user = machineData.user;
+    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
     const ssh = hostname && port && user ? `ssh ${user}@${hostname} -p ${port}` : null;
     const date = adjustDate ? machineData.date.toLocaleString() : machineData.date;
     return { ...machineData, date, hostname, port, ssh };
@@ -33,18 +46,6 @@ function handleCheckErrorString(str, name) {
     }
 
     return message;
-}
-
-function getHostnameAndPort(url) {
-    let result = { hostname: null, port: null };
-
-    if (url) {
-        const regexp = /^tcp:\/\/(?<hostname>[\w\.]+):(?<port>\d+)$/;
-        const match = url.match(regexp);
-        result = match?.groups ?? result;
-    }
-
-    return result;
 }
 
 // MIDDLEWARES
