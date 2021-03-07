@@ -75,13 +75,13 @@ logger.hr();
 
 logger.info('Add routes...');
 
-logger.debug('GET /eagletrt/machines');
-app.get('/eagletrt/machines', (_req, res) => {
-    res.send(Object.keys(data));
+logger.debug('GET /api/machines');
+app.get('/api/machines', (_req, res) => {
+    res.json(Object.keys(data));
 });
 
-logger.debug('GET /eagletrt/:machine/info');
-app.get('/eagletrt/:machine/info', (req, res) => {
+logger.debug('GET /api/machines/:machine');
+app.get('/api/machines/:machine', (req, res) => {
     const { machine } = req.params;
 
     const errorMessage = handleCheckErrorString(machine, 'machine');
@@ -91,17 +91,36 @@ app.get('/eagletrt/:machine/info', (req, res) => {
 
     let machineData = data[machine];
     if (!machineData) {
-        machineData = getEmptyMachineData();
-        data[machine] = machineData;
+        return res.status(404).send('Machine not found');
     }
 
     const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    res.send({ ...machineData, hostname, port, ssh });
+    res.json({ ...machineData, hostname, port, ssh });
 });
 
-logger.debug('POST /eagletrt/:machine/info');
-app.post('/eagletrt/:machine/info', (req, res) => {
+logger.debug('GET /api/machines/:machine/:field');
+app.get('/api/machines/:machine/:field', (req, res) => {
+    const { machine } = req.params;
+
+    const errorMessage = handleCheckErrorString(machine, 'machine');
+    if (errorMessage) {
+        return res.status(400).send(errorMessage);
+    }
+
+    let machineData = data[machine];
+    if (!machineData) {
+        return res.status(404).send('Machine not found');
+    }
+    else if (!(field in machineData)) {
+        return res.status(400).send('Invalid field');
+    }
+
+    res.send(machineData[field]);
+});
+
+logger.debug('POST /api/machines/:machine');
+app.post('/api/machines/:machine', (req, res) => {
     const { machine } = req.params;
 
     const errorMessage = handleCheckErrorString(machine, 'machine');
@@ -143,14 +162,29 @@ app.set('view engine', 'hbs');
 logger.debug('Expose static content');
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-logger.debug('Add main frontend route');
+logger.debug('GET /');
 app.get('/', (_req, res) => {
     const machineData = data.telemetria;
     const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
     const date = machineData.date ? machineData.date.toLocaleString() : null;
     res.render('home', { ...machineData, date, hostname, port, ssh });
-})
+});
+
+logger.debug('GET /:machine');
+app.get('/:machine', (req, res) => {
+    const { machine } = req.query;
+    const errorMessage = handleCheckErrorString(machine, 'machine');
+    if (errorMessage) {
+        return res.status(400).send(errorMessage);
+    }
+
+    const machineData = data[machine];
+    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
+    const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
+    const date = machineData.date ? machineData.date.toLocaleString() : null;
+    res.render('home', { ...machineData, date, hostname, port, ssh });
+});
 
 // LISTEN
 
