@@ -1,0 +1,12 @@
+[Unit]
+Description=Eagle-TRT telemetry ip share
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=ubuntu
+ExecStart=/usr/bin/node /home/ubuntu/eagletrt-telemetria-ip/client/index.js
+WorkingDirectory=/home/ubuntu/eagletrt-telemetria-ip/client
+[Install]
+WantedBy=multi-user.target

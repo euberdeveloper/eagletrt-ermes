@@ -1,0 +1,10 @@
+[Unit]
+Description=ngrok script
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=ubuntu
+ExecStart=/usr/local/bin/ngrok tcp 22
+[Install]
+WantedBy=multi-user.target
