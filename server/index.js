@@ -84,15 +84,15 @@ logger.debug('GET /eagletrt/:machine/info');
 app.get('/eagletrt/:machine/info', (req, res) => {
     const { machine } = req.params;
 
-    const errorMessage = handleCheckErrorString(machine, param);
+    const errorMessage = handleCheckErrorString(machine, 'machine');
     if (errorMessage) {
         return res.status(400).send(errorMessage);
     }
 
-    const machineData = data.machine;
+    let machineData = data[machine];
     if (!machineData) {
         machineData = getEmptyMachineData();
-        data.machine = machineData;
+        data[machine] = machineData;
     }
 
     const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
@@ -104,7 +104,7 @@ logger.debug('POST /eagletrt/:machine/info');
 app.post('/eagletrt/:machine/info', (req, res) => {
     const { machine } = req.params;
 
-    const errorMessage = handleCheckErrorString(machine, param);
+    const errorMessage = handleCheckErrorString(machine, 'machine');
     if (errorMessage) {
         return res.status(400).send(errorMessage);
     }
