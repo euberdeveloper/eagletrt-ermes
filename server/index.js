@@ -131,6 +131,7 @@ app.post('/api/machines/:machine', (req, res) => {
         ngrokUrl: req.body.ngrokUrl,
         localIp: req.body.localIp,
         publicIp: req.body.publicIp,
+        user: req.body.user,
         date: new Date()
     };
 
