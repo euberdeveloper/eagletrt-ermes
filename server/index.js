@@ -145,11 +145,11 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 logger.debug('Add main frontend route');
 app.get('/', (_req, res) => {
-    const data = data.telemetria;
-    const { hostname, port } = getHostnameAndPort(data.ngrokUrl);
+    const machineData = data.telemetria;
+    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
     const ssh = hostname && port ? `ssh ubuntu@${hostname} -p ${port}` : null;
-    const date = data.date ? data.date.toLocaleString() : null;
-    res.render('home', { ...data, date, hostname, port, ssh });
+    const date = machineData.date ? machineData.date.toLocaleString() : null;
+    res.render('home', { ...machineData, date, hostname, port, ssh });
 })
 
 // LISTEN
