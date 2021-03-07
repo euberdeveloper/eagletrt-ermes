@@ -27,7 +27,7 @@ body {
 }
 
 h1#title {
-    margin-top: 24px;
+    margin-top: 18px;
     margin-bottom: 5px;
     color: #e0b010;
     font-size: 2.5em;
@@ -36,21 +36,21 @@ h1#title {
 
 h2#subtitle {
     margin-top: 2px;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     color: #36bf2d;
     font-size: 2.5em;
     text-align: center;
 }
 
 #logo {
-    width: 250px;
-    margin: 36px 0;
+    width: 220px;
+    margin: 28px 0;
     animation: clock 7s infinite;
 }
 
 #copyarea {
     width: 100%;
-    margin-top: 25px;
+    margin-top: 20px;
     padding: 20px;
     border-radius: 25px;
     background-color: #101010;
@@ -59,7 +59,7 @@ h2#subtitle {
 }
 
 #copyarea>.item {
-    height: 50px;
+    min-height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -100,7 +100,6 @@ h2#subtitle {
 
 #last-update {
     flex: 1;
-    
     text-align: center;
     color: #c0c0c0;
     font-size: 1.3em;
@@ -127,9 +126,6 @@ h2#subtitle {
         min-height: 100vh;
         margin: 0 2.5vw;
     }
-    #copyarea {
-        padding: 20px 0;
-    }
     h1#title {
         font-size: 2.2em;
     }
@@ -137,6 +133,42 @@ h2#subtitle {
         font-size: 2.2em;
     }
     #logo {
-        width: 200px;
+        margin: 20px 0;
+        width: 170px;
+    }
+    #copyarea {
+        padding: 20px 0;
+    }
+    #copyarea>.item {
+        margin: 12px 0;
+        min-height: 70px;
+        display: grid;
+        grid-template-areas: "title copy" "value copy";
+    }
+    #copyarea>.item>.title {
+        grid-area: title;
+        margin-left: 18px;
+        font-size: 1.1em;
+    }
+    #copyarea>.item>.value {
+        grid-area: value;
+        margin-left: 18px;
+        font-size: 1.1em;
+    }
+    #copyarea>.item>.copy {
+        grid-area: copy;
+        margin-right: 20px;
+    }
+    #copyarea>.item.last-update {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    #last-update {
+        flex: 1;
+        text-align: center;
+        text-decoration: underline;
+        color: #c0c0c0;
+        font-size: 1em;
     }
 }
