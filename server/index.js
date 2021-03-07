@@ -101,7 +101,7 @@ app.get('/api/machines/:machine', (req, res) => {
 
 logger.debug('GET /api/machines/:machine/:field');
 app.get('/api/machines/:machine/:field', (req, res) => {
-    const { machine } = req.params;
+    const { machine, field } = req.params;
 
     const errorMessage = handleCheckErrorString(machine, 'machine');
     if (errorMessage) {
