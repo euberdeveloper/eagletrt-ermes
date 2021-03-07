@@ -1,4 +1,5 @@
 const axios = require('axios');
+const os = require('os');
 const { networkInterfaces } = require('os');
 const { Logger } = require('euberlog');
 
@@ -14,6 +15,10 @@ function requireConfig() {
 const { RATE_IN_MILLISECONDS, GET_PORT_URL, POST_PORT_URL, GET_PUBLIC_IP_URL } = requireConfig();
 
 const logger = new Logger();
+
+function getUser() {
+    return os.userInfo().username;
+}
 
 async function getNgrokUrl() {
     try {
@@ -59,9 +64,9 @@ function getLocalIP() {
     return "";
 }
 
-async function sendData(ngrokUrl, localIp, publicIp) {
+async function sendData(payload) {
     try {
-        await axios.post(POST_PORT_URL, { ngrokUrl, localIp, publicIp });
+        await axios.post(POST_PORT_URL, payload);
     }
     catch (error) {
         logger.error('Error in sending data', error);
@@ -70,17 +75,20 @@ async function sendData(ngrokUrl, localIp, publicIp) {
 
 async function main() {
     setInterval(async () => {
-        logger.info('Getting port', (new Date()).toISOString());
-        const ngrokUrl = getNgrokUrl();
+        logger.info('Getting os user', (new Date()).toISOString());
+        const user = getUser();
+
+        logger.info('Getting ngrok', (new Date()).toISOString());
+        const ngrokUrl = await getNgrokUrl();
 
         logger.info('Getting local ip', (new Date()).toISOString());
         const localIp = getLocalIP();
 
         logger.info('Getting public ip', (new Date()).toISOString());
-        const publicIp = getPublicIP();
+        const publicIp = await getPublicIP();
 
         logger.info('Sending data', (new Date()).toISOString());
-        await sendData(await ngrokUrl, localIp, await publicIp);
+        await sendData({ user, ngrokUrl, localIp, publicIp });
     }, RATE_IN_MILLISECONDS);
 }
 
