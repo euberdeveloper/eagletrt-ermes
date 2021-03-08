@@ -16,7 +16,7 @@ You can install ngrok from [here](https://ngrok.com/download).
 
 The ngrok is automatically started with a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ngrok.service) and opens an ssh tunnel with a certain **hostname** and **port**. (**Note:** the port is usually **not** 22, hence you should use the `-p PORT` parameter of the `ssh` command).
 
-### Client
+### Client Nodejs
 
 Another problem was that ngrok did not use always the same hostname and the same port. Hence, we made a **client** that continuously sends to a server (hosted with heroku) its information.
 
@@ -34,15 +34,21 @@ The `config.default.js` file is used by default, but a similar `config.js` file 
 
 The client is written in **Node.js** and uses **[axios](https://www.npmjs.com/package/axios)** and **[euberlog](https://www.npmjs.com/package/euberlog)** as external dependencies.
 
-There is also a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip.service) that executes the client.
+There is also a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip-node.service) that executes the client.
 
 In order to use the client:
 1) Clone this repository `git clone https://github.com/eagletrt/eagletrt-telemetria-ip`.
-2) Move to the client `cd eagletrt-telemeta-ip/client`.
+2) Move to the client `cd eagletrt-telemeta-ip/client/node`.
 3) Install the dependencies `npm install`.
 4) If you need it, copy the `config.default.js` file to `config.js` file by running `cp config.default.js config.js`.
 5) In order to start locally the client run `npm start` inside the `client` folder.
-6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip.service).
+6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip-node.service).
+
+### Client bash
+
+There is also a client written in **bash**. It is not configurable and resides [here](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/client/shell/client.sh).
+
+This is the [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip.service) that executes the client.
 
 ### Server
 
