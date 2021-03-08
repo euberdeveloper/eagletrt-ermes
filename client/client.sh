@@ -9,4 +9,4 @@ local_ip="$(ip route get 1 | awk '{print $(NF-2); exit}')"
 public_ip="$(curl -s https://ipinfo.io/ip)"
 user="$(id -un)"
 
-curl -X POST -sd "{ \"ngrokUrl\":\"$ngrok_url\", \"localIp\":\"$local_ip\", \"publicIp\":\"$public_ip\", \"user\":\"$user\" }" http://eagletrt-telemetria-ip.herokuapp.com/api/machines/telemetria
+curl -X POST -sH "Content-Type: application/json" -d "{ \"ngrokUrl\":\"$ngrok_url\", \"localIp\":\"$local_ip\", \"publicIp\":\"$public_ip\", \"user\":\"$user\" }" http://eagletrt-telemetria-ip.herokuapp.com/api/machines/telemetria
