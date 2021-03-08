@@ -1,0 +1,7 @@
+Restart=always
+RestartSec=5
+User=ubuntu
+ExecStart=/usr/bin/node /home/ubuntu/eagletrt-telemetria-ip/client/node/index.js
+WorkingDirectory=/home/ubuntu/eagletrt-telemetria-ip/client/node
+[Install]
+WantedBy=multi-user.target 
