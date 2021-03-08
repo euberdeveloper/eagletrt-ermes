@@ -5,6 +5,8 @@ Description=Eagle-TRT proxy URL share script
 Type=simple
 User=ubuntu
 ExecStart=/home/ubuntu/eagletrt-telemetria-ip/client/shell/client.sh
+WorkingDirectory=/home/ubuntu/eagletrt-telemetria-ip/client/shell
 
 [Install]
 WantedBy=multi-user.target
+After=network-online.target
