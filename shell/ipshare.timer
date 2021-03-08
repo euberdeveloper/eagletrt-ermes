@@ -1,0 +1,8 @@
+[Unit]
+Description=Run IP share periodically
+
+[Timer]
+OnUnitActiveSec=5s 
+
+[Install]
+WantedBy=timers.target

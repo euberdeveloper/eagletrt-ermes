@@ -1,12 +1,10 @@
 [Unit]
-Description=Eagle-TRT telemetry ip share
-StartLimitIntervalSec=0
+Description=Eagle-TRT proxy URL share script
+
 [Service]
 Type=simple
-Restart=always
-RestartSec=5
 User=ubuntu
 ExecStart=/home/ubuntu/eagletrt-telemetria-ip/client/client.sh
-WorkingDirectory=/home/ubuntu/eagletrt-telemetria-ip/client
+
 [Install]
 WantedBy=multi-user.target
