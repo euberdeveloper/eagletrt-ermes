@@ -42,13 +42,13 @@ In order to use the client:
 3) Install the dependencies `npm install`.
 4) If you need it, copy the `config.default.js` file to `config.js` file by running `cp config.default.js config.js`.
 5) In order to start locally the client run `npm start` inside the `client` folder.
-6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip-node.service).
+6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ipshare-node.service).
 
 ### Client bash
 
 There is also a client written in **bash**. It is not configurable and resides [here](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/client/shell/client.sh).
 
-This is the [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip.service) that executes the client.
+This is the [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ipshare.service) that executes the client.
 
 ### Server
 
