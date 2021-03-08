@@ -8,3 +8,4 @@ ExecStart=/home/ubuntu/eagletrt-telemetria-ip/client/client.sh
 
 [Install]
 WantedBy=multi-user.target
+After=network-online.target
