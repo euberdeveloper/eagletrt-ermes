@@ -1,6 +1,6 @@
-var clipboard = new ClipboardJS('.clipboardjs');
+const clipboard = new ClipboardJS('.clipboardjs');
 
-clipboard.on('success', function(e) {
+    clipboard.on('success', function(e) {
     console.info('Action:', e.action);
     console.info('Text:', e.text);
     console.info('Trigger:', e.trigger);
