@@ -8,7 +8,7 @@ When the raspberry of the telemetry is connected to the internet, it has not a p
 
 ## How does it work
 
-### Ngrok
+### First solution: Ngrok
 
 We firstly used a reverse ssh by using a server with public IP address. The problem was that after a while that server was not anymore available to us, hence we started using **ngrok**. 
 
@@ -92,3 +92,29 @@ The **shell** script is also served by the `/shish` api call.
 ### Usage
 
 There is a [shell script](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shi.sh) that calls the api and executes automatically the shell command.
+
+
+### Second solution: Zerotier + mosh
+
+It came out that there where some problem of synchronization of ip with ngrok so we decided to implement a parallel solution which allows us to connect to the rapsberry in an alternative way using **zerotier**, moreover to reduce latency we decided to use the ssh wrapper **mosh**.
+
+### Zerotier setup
+
+First of all we sign up to [zerotier](https://www.zerotier.com/) to be able to create a network, this network is set to private to be able to control accesses and it auto-assigns ip in 192.168.195.* range.
+
+Then all clients which want to connect to the created zerotier network need to install zerotier client with `curl -s https://install.zerotier.com | sudo bash`, although it is installed manually all updates of the service will be managed by **apt**.
+
+After that you can join the previously created network, which id's can be found in the zerotier dashboard, with `sudo zerotier-cli join <network ID>`, if you receive an error like `zerotier-cli: missing port and zerotier-one.port not found in /var/lib/zerotier-one` manually start zerotier-cli with `sudo service zerotier-one start` and repeat. After authorizing the client throw zerotier dashboard you can see your **IP address** in the zerotier network with `ip addr sh | grep 'inet.*zt'`.
+
+### Usage
+
+Now it is possible to connect to all devices in the same network as if they are part of a LAN, for exapmle you can connect via ssh with `ssh <username>@<zerotier IP>`.
+
+
+
+
+
+
+
+
+
