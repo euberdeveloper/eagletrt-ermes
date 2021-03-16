@@ -106,11 +106,17 @@ Then all clients which want to connect to the created zerotier network need to i
 
 After that you can join the previously created network, which id's can be found in the zerotier dashboard, with `sudo zerotier-cli join <network ID>`, if you receive an error like `zerotier-cli: missing port and zerotier-one.port not found in /var/lib/zerotier-one` manually start zerotier-cli with `sudo service zerotier-one start` and repeat. After authorizing the client throw zerotier dashboard you can see your **IP address** in the zerotier network with `ip addr sh | grep 'inet.*zt'`.
 
-### Usage
+#### Usage
 
-Now it is possible to connect to all devices in the same network as if they are part of a LAN, for exapmle you can connect via ssh with `ssh <username>@<zerotier IP>`.
+Now it is possible to connect to all devices in the same network as if they are part of a LAN, for example you can connect via ssh with `ssh <username>@<zerotier IP>`. All ip's are static within the network so it is not necessary to update the ssh command, moreover it is suggested to **login with private/public key** instead of using passowrd to do so you can generate keys with `ssh-keygen` and send them to the server with `ssh-copy-id -i <key path> <user>@<server>`.
 
+### Mosh setup
 
+It is required to install [mosh](https://mosh.org/#getting) both on client and server with `sudo apt-get install mosh`. After that you need to disable local variables acceptance form the server, to do so you need to edit `/etc/ssh/sshd_config` and comment the line `AcceptEnv LANG LC_*`.
+
+#### Usage
+
+To connect to a client with mosh use `mosh <user>@<server>`.
 
 
 
