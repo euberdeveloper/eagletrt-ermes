@@ -31,10 +31,12 @@ function getHostnameAndPort(url) {
 
 function parseMachineData(machineData, adjustDate = false) {
     const user = machineData.user;
-    const { hostname, port } = getHostnameAndPort(machineData.ngrokUrl);
-    const ssh = hostname && port && user ? `ssh ${user}@${hostname} -p ${port}` : null;
+    const zerotierJoin = `zerotier-cli join ${zerotierId}`;
+    const zerotierSsh = `ssh ${user}@${machineData.zerotierIp}}`;
+    const { hostname: ngrokHostname, port: ngrokPort } = getHostnameAndPort(machineData.ngrokUrl);
+    const ngrokSsh = hostname && port && user ? `ssh ${user}@${hostname} -p ${port}` : null;
     const date = adjustDate ? machineData.date.toLocaleString() : machineData.date;
-    return { ...machineData, date, hostname, port, ssh };
+    return { ...machineData, date, zerotierJoin, zerotierSsh, ngrokHostname, ngrokPort, ngrokSsh };
 }
 
 function handleCheckErrorString(str, name) {
@@ -129,6 +131,8 @@ app.post('/api/machines/:machine', (req, res) => {
     }
 
     const newData = {
+        zerotierId: req.body.zerotierId,
+        zerotierIp: req.body.zerotierIp,
         ngrokUrl: req.body.ngrokUrl,
         localIp: req.body.localIp,
         publicIp: req.body.publicIp,
