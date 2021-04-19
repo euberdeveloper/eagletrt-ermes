@@ -116,20 +116,18 @@ async function main() {
         logger.info('Getting zerotier info', currentDateString());
         const zerotierInfo = await getZerotierInfo();
 
-        console.log({user, zerotierInfo})
+        logger.info('Getting ngrok', currentDateString());
+        const ngrokUrl = await getNgrokUrl();
 
-        // logger.info('Getting ngrok', currentDateString());
-        // const ngrokUrl = await getNgrokUrl();
+        logger.info('Getting local ip', currentDateString());
+        const localIp = getLocalIP();
 
-        // logger.info('Getting local ip', currentDateString());
-        // const localIp = getLocalIP();
-
-        // logger.info('Getting public ip', currentDateString());
-        // const publicIp = await getPublicIP();
+        logger.info('Getting public ip', currentDateString());
+        const publicIp = await getPublicIP();
 
 
-        // logger.info('Sending data', currentDateString());
-        // await sendData({ user, zerotierInfo, ngrokUrl, localIp, publicIp });
+        logger.info('Sending data', currentDateString());
+        await sendData({ user, zerotierInfo, ngrokUrl, localIp, publicIp });
     }, RATE_IN_MILLISECONDS);
 }
 
