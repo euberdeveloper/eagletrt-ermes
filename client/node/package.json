@@ -10,6 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "axios": "^0.21.1",
-        "euberlog": "^2.0.9"
+        "euberlog": "^2.0.9",
+        "shelljs": "^0.8.4"
     }
 }

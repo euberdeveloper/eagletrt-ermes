@@ -1,4 +1,5 @@
 const axios = require('axios');
+const shelljs = require('shelljs');
 const os = require('os');
 const { networkInterfaces } = require('os');
 const { Logger } = require('euberlog');
@@ -12,13 +13,45 @@ function requireConfig() {
     }
 }
 
-const { RATE_IN_MILLISECONDS, GET_PORT_URL, POST_PORT_URL, GET_PUBLIC_IP_URL } = requireConfig();
+const { RATE_IN_MILLISECONDS, GET_PORT_URL, POST_PORT_URL, GET_PUBLIC_IP_URL, GET_ZEROTIER_INFO_COMMAND } = requireConfig();
 
 const logger = new Logger();
+
+/* HELPER FUNCTIONS */
+
+function currentDateString() {
+    return new Date().toISOString();
+}
+
+async function execAsync(command, options = {}) {
+    return new Promise((resolve, reject) => {
+        shelljs.exec(command, { ...options, async: true }, (code, stdout, stderr) => {
+            if (code === 0) {
+                resolve({ code, stdout, stderr });
+            } else {
+                reject({ code, stdout, stderr });
+            }
+        });
+    });
+}
+
+/* PROVIDER FUNCTIONS */
 
 function getUser() {
     return os.userInfo().username;
 }
+
+async function getZerotierInfo() {
+    try {
+        const { stdout: result } = await execAsync(GET_ZEROTIER_INFO_COMMAND, { silent: true });
+        const [zeroTierId, zeroTierIp] = result.split('\n')[1].split(' ').slice(7);
+        return { zeroTierId, zeroTierIp: zeroTierIp.split('/')[0] };
+    }
+    catch (error) {
+        logger.error('Error in getting zerotier info', error);
+    }
+}
+
 
 async function getNgrokUrl() {
     try {
@@ -73,22 +106,30 @@ async function sendData(payload) {
     }
 }
 
+/* MAIN */
+
 async function main() {
     setInterval(async () => {
-        logger.info('Getting os user', (new Date()).toISOString());
+        logger.info('Getting os user', currentDateString());
         const user = getUser();
 
-        logger.info('Getting ngrok', (new Date()).toISOString());
-        const ngrokUrl = await getNgrokUrl();
+        logger.info('Getting zerotier info', currentDateString());
+        const zerotierInfo = await getZerotierInfo();
 
-        logger.info('Getting local ip', (new Date()).toISOString());
-        const localIp = getLocalIP();
+        console.log({user, zerotierInfo})
 
-        logger.info('Getting public ip', (new Date()).toISOString());
-        const publicIp = await getPublicIP();
+        // logger.info('Getting ngrok', currentDateString());
+        // const ngrokUrl = await getNgrokUrl();
 
-        logger.info('Sending data', (new Date()).toISOString());
-        await sendData({ user, ngrokUrl, localIp, publicIp });
+        // logger.info('Getting local ip', currentDateString());
+        // const localIp = getLocalIP();
+
+        // logger.info('Getting public ip', currentDateString());
+        // const publicIp = await getPublicIP();
+
+
+        // logger.info('Sending data', currentDateString());
+        // await sendData({ user, zerotierInfo, ngrokUrl, localIp, publicIp });
     }, RATE_IN_MILLISECONDS);
 }
 
