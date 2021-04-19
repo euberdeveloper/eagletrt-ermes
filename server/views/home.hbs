@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>EagleTRT - telemetria info</title>
+    <title>EagleTRT - telemetria ip</title>
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <link rel="stylesheet" href="/public/home.css" />
     <link rel=icon href="/public/favicon.ico">
@@ -35,6 +35,51 @@
                 </span>
             </div>
 
+            <!-- USER -->
+            <div class="item user">
+                <span class="title">User</span>
+                <span class="value" id="user">{{user}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#user" />
+                </span>
+            </div>
+
+            <!-- ZEROTIER ID -->
+            <div class="item zerotier-id">
+                <span class="title">Zerotier Id</span>
+                <span class="value" id="zerotier-id">{{zerotierId}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#zerotier-id" />
+                </span>
+            </div>
+
+            <!-- ZEROTIER IP -->
+            <div class="item zerotier-ip">
+                <span class="title">Zerotier Ip</span>
+                <span class="value" id="zerotier-ip">{{zerotierIp}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#zerotier-ip" />
+                </span>
+            </div>
+
+            <!-- ZEROTIER JOIN -->
+            <div class="item zerotier-join">
+                <span class="title">Zerotier Join</span>
+                <span class="value" id="zerotier-join">{{zerotierJoin}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#zerotier-join" />
+                </span>
+            </div>
+
+            <!-- ZEROTIER SSH -->
+            <div class="item zerotier-ssh">
+                <span class="title">Zerotier SSH</span>
+                <span class="value" id="zerotier-ssh">{{zerotierSsh}}</span>
+                <span class="copy">
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#zerotier-ssh" />
+                </span>
+            </div>
+
             <!-- NGROK URL -->
             <div class="item ngrok-url">
                 <span class="title">Ngrok Url</span>
@@ -45,38 +90,30 @@
             </div>
 
             <!-- HOSTNAME -->
-            <div class="item hostname">
-                <span class="title">Hostname</span>
-                <span class="value" id="hostname" >{{hostname}}</span>
+            <div class="item ngrok-hostname">
+                <span class="title">Ngrok Hostname</span>
+                <span class="value" id="ngrok-hostname">{{ngrokHostname}}</span>
                 <span class="copy">
-                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#hostname" />
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs"
+                        data-clipboard-target="#ngrok-hostname" />
                 </span>
             </div>
 
             <!-- PORT -->
-            <div class="item port">
-                <span class="title">Port</span>
-                <span class="value" id="port">{{port}}</span>
+            <div class="item ngrok-port">
+                <span class="title">Ngrok Port</span>
+                <span class="value" id="ngrok-port">{{ngrokPort}}</span>
                 <span class="copy">
-                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#port" />
-                </span>
-            </div>
-
-            <!-- USER -->
-            <div class="item user">
-                <span class="title">User</span>
-                <span class="value" id="user">{{user}}</span>
-                <span class="copy">
-                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#user" />
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#ngrok-port" />
                 </span>
             </div>
 
             <!-- SSH -->
-            <div class="item ssh">
-                <span class="title">SSH</span>
-                <span class="value" id="ssh">{{ssh}}</span>
+            <div class="item ngrok-ssh">
+                <span class="title">Ngrok SSH</span>
+                <span class="value" id="ngrok-ssh">{{ngrokSsh}}</span>
                 <span class="copy">
-                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#ssh" />
+                    <img src="/public/copy.png" alt="copy" class="clipboardjs" data-clipboard-target="#ngrok-ssh" />
                 </span>
             </div>
 
