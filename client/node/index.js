@@ -44,8 +44,8 @@ function getUser() {
 async function getZerotierInfo() {
     try {
         const { stdout: result } = await execAsync(GET_ZEROTIER_INFO_COMMAND, { silent: true });
-        const [zeroTierId, zeroTierIp] = result.split('\n')[1].split(' ').slice(7);
-        return { zeroTierId, zeroTierIp: zeroTierIp.split('/')[0] };
+        const [zerotierId, zerotierIp] = result.split('\n')[1].split(' ').slice(7);
+        return { zerotierId, zerotierIp: zerotierIp.split('/')[0] };
     }
     catch (error) {
         logger.error('Error in getting zerotier info', error);
@@ -88,13 +88,13 @@ function getLocalIP() {
             }
         }
     }
-    if (results["wlan0"] && results["wlan0"].length > 0) {
-        return results["wlan0"][0];
+    if (results['wlan0'] && results['wlan0'].length > 0) {
+        return results['wlan0'][0];
     }
-    if (results["eth0"] && results["eth0"].length > 0) {
-        return results["eth0"][0];
+    if (results['eth0'] && results['eth0'].length > 0) {
+        return results['eth0'][0];
     }
-    return "";
+    return '';
 }
 
 async function sendData(payload) {
@@ -114,7 +114,7 @@ async function main() {
         const user = getUser();
 
         logger.info('Getting zerotier info', currentDateString());
-        const zerotierInfo = await getZerotierInfo();
+        const { zerotierId, zerotierIp } = await getZerotierInfo();
 
         logger.info('Getting ngrok', currentDateString());
         const ngrokUrl = await getNgrokUrl();
@@ -126,7 +126,7 @@ async function main() {
         const publicIp = await getPublicIP();
 
         logger.info('Sending data', currentDateString());
-        await sendData({ user, zerotierInfo, ngrokUrl, localIp, publicIp });
+        await sendData({ user, zerotierId, zerotierIp, ngrokUrl, localIp, publicIp });
     }, RATE_IN_MILLISECONDS);
 }
 
