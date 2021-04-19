@@ -31,10 +31,10 @@ function getHostnameAndPort(url) {
 
 function parseMachineData(machineData, adjustDate = false) {
     const user = machineData.user;
-    const zerotierJoin = `zerotier-cli join ${zerotierId}`;
-    const zerotierSsh = `ssh ${user}@${machineData.zerotierIp}}`;
+    const zerotierJoin = `zerotier-cli join ${machineData.zerotierId}`;
+    const zerotierSsh = `ssh ${user}@${machineData.zerotierIp}`;
     const { hostname: ngrokHostname, port: ngrokPort } = getHostnameAndPort(machineData.ngrokUrl);
-    const ngrokSsh = hostname && port && user ? `ssh ${user}@${hostname} -p ${port}` : null;
+    const ngrokSsh = ngrokHostname && ngrokPort && user ? `ssh ${user}@${ngrokHostname} -p ${ngrokPort}` : null;
     const date = adjustDate ? machineData.date.toLocaleString() : machineData.date;
     return { ...machineData, date, zerotierJoin, zerotierSsh, ngrokHostname, ngrokPort, ngrokSsh };
 }
