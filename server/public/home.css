@@ -6,6 +6,14 @@
         transform: rotate(360deg);
     }
 }
+@keyframes english-clock { /* In Inghilterra sono tutti roversi... */
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
 
 html, body {
     margin: 0;
@@ -26,6 +34,19 @@ body {
     align-items: center;
 }
 
+header {
+    margin: 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#title-container {
+    margin: 0 32px;
+}
+
 h1#title {
     margin-top: 18px;
     margin-bottom: 5px;
@@ -42,15 +63,20 @@ h2#subtitle {
     text-align: center;
 }
 
-#logo {
-    width: 220px;
+.logo {
+    width: 180px;
     margin: 28px 0;
+}
+
+.logo.clock {
     animation: clock 7s infinite;
+}
+.logo.english-clock {
+    animation: english-clock 7s infinite;
 }
 
 #copyarea {
     width: 100%;
-    margin-top: 20px;
     padding: 20px;
     border-radius: 25px;
     background-color: #101010;
