@@ -125,7 +125,6 @@ async function main() {
         logger.info('Getting public ip', currentDateString());
         const publicIp = await getPublicIP();
 
-
         logger.info('Sending data', currentDateString());
         await sendData({ user, zerotierInfo, ngrokUrl, localIp, publicIp });
     }, RATE_IN_MILLISECONDS);
