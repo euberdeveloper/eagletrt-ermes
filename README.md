@@ -30,6 +30,7 @@ The `config.default.js` file is used by default, but a similar `config.js` file 
 - __RATE_IN_MILLISECONDS__: Every how many milliseconds should the client send the information to the server
 - __GET_PORT_URL__: The url that the client uses to get the Ngrok url. This is because ngrok expose an api to get information such as the used address.
 - __GET_PUBLIC_IP_URL__: The url used to get the current public ip address. This is because to know it you should use an api call to an external service.
+- __GET_ZEROTIER_INFO_COMMAND__: The command used to get the information from zerotier.
 - __POST_PORT_URL__: Ther url of the server where you post the machine information.
 
 The client is written in **Node.js** and uses **[axios](https://www.npmjs.com/package/axios)** and **[euberlog](https://www.npmjs.com/package/euberlog)** as external dependencies.
