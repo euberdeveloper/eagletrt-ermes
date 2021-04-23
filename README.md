@@ -33,7 +33,7 @@ The `config.default.js` file is used by default, but a similar `config.js` file 
 - __GET_ZEROTIER_INFO_COMMAND__: The command used to get the information from zerotier.
 - __POST_PORT_URL__: Ther url of the server where you post the machine information.
 
-The client is written in **Node.js** and uses **[axios](https://www.npmjs.com/package/axios)** and **[euberlog](https://www.npmjs.com/package/euberlog)** as external dependencies.
+The client is written in **Node.js** and uses **[axios](https://www.npmjs.com/package/axios)**, **[shelljs](https://www.npmjs.com/package/shelljs)** and **[euberlog](https://www.npmjs.com/package/euberlog)** as external dependencies.
 
 There is also a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip-node.service) that executes the client.
 
