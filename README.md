@@ -47,7 +47,7 @@ It is required to install [mosh](https://mosh.org/#getting) both on client and s
 To connect to a client with mosh use `mosh <user>@<server>`.
 
 
-## Clients and server
+## Client and server
 
 ### Client Nodejs
 
@@ -70,7 +70,7 @@ The `config.default.js` file is used by default, but a similar `config.js` file 
 
 The client is written in **Node.js** and uses **[axios](https://www.npmjs.com/package/axios)**, **[shelljs](https://www.npmjs.com/package/shelljs)** and **[euberlog](https://www.npmjs.com/package/euberlog)** as external dependencies.
 
-There is also a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip-node.service) that executes the client.
+There is also a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip.service) that executes the client.
 
 In order to use the client:
 1) Clone this repository `git clone https://github.com/eagletrt/eagletrt-telemetria-ip`.
@@ -79,12 +79,6 @@ In order to use the client:
 4) Only if you need to change the default options, copy the `config.default.js` file to `config.js` file by running `cp config.default.js config.js`.
 5) In order to start locally the client run `npm start` inside the `client` folder.
 6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ipshare-node.service).
-
-### Client bash
-
-There is also a client written in **bash**. It is not configurable and resides [here](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/client/shell/client.sh).
-
-This is the [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ipshare.service) that executes the client.
 
 ### Server
 
@@ -128,8 +122,6 @@ While the result of a **GET**:
     "user": "ubuntu"
 }
 ```
-
-The **shell** script is also served by the `/shish` api call.
 
 ### Site and api
 

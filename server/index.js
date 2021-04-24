@@ -156,13 +156,6 @@ logger.success('Routes added');
 
 logger.hr();
 
-// SHELL
-
-logger.debug('GET /');
-app.get('/shish', (_req, res) => {
-    res.download(path.join(__dirname, '..', 'shell', 'shi.sh'), 'shi.sh');
-});
-
 // FRONTEND
 
 logger.info('Setting forntend');
