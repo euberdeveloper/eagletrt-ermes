@@ -167,9 +167,9 @@ h2#subtitle {
         flex-direction: column;
     }
     #content {
-        width: 95vw;
+        width: 95%;
         min-height: 100vh;
-        margin: 0 2.5vw;
+        margin: auto;
     }
     #title-container {
         order: 0;
@@ -217,5 +217,8 @@ h2#subtitle {
         text-decoration: underline;
         color: #c0c0c0;
         font-size: 1em;
+    }
+    #copyarea>.item>.value {
+        text-align: left;
     }
 }
