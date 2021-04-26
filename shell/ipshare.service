@@ -1,12 +1,12 @@
 [Unit]
-Description=Eagle-TRT telemetry ip share
+Description=Eagle-TRT Ermes
 StartLimitIntervalSec=0
 [Service]
 Type=simple
 Restart=always
 RestartSec=5
 User=ubuntu
-ExecStart=/usr/bin/node /home/ubuntu/eagletrt-telemetria-ip/client/index.js
-WorkingDirectory=/home/ubuntu/eagletrt-telemetria-ip/client
+ExecStart=/usr/bin/node /home/ubuntu/ermes/client/index.js
+WorkingDirectory=/home/ubuntu/ermes/client
 [Install]
 WantedBy=multi-user.target 
