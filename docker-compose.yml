@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  ngrok:
+    image: shkoliar/ngrok:latest
+    ports:
+      - 4551:4551
+      - 4040:4040
+    environment:
+      - PROTOCOL=http
+      - PORT=6000
+  client:
+    build: ./client
+    volumes:
+      - ./client/config.docker.js:/client/config.js
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
