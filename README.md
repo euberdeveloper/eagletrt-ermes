@@ -1,4 +1,4 @@
-# ermes
+# eagletrt-ermes
 
 The project that makes remote access to the telemetry very easy.
 
