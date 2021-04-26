@@ -1,4 +1,4 @@
-# eagletrt-telemetria-ip
+# ermes
 
 The project that makes remote access to the telemetry very easy.
 
@@ -14,13 +14,13 @@ We firstly used a reverse ssh by using a server with public IP address. The prob
 
 You can install ngrok from [here](https://ngrok.com/download) and it is needed to be installed only on the raspberry side.
 
-The ngrok is automatically started with a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ngrok.service) and opens an ssh tunnel with a certain **hostname** and **port**. (**Note:** the port is usually **not** 22, hence you should use the `-p PORT` parameter of the `ssh` command).
+The ngrok is automatically started with a [service](https://github.com/eagletrt/ermes/blob/main/shell/ngrok.service) and opens an ssh tunnel with a certain **hostname** and **port**. (**Note:** the port is usually **not** 22, hence you should use the `-p PORT` parameter of the `ssh` command).
 
 We now suggest to use the zerotier solution instead, but ngrok is still maintained as a second option.
 
 #### Usage
 
-There is a [shell script](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shi.sh) that calls the api and executes automatically the shell command.
+There is a [shell script](https://github.com/eagletrt/ermes/blob/main/shell/shi.sh) that calls the api and executes automatically the shell command.
 
 ### Second solution: Zerotier + mosh
 
@@ -70,19 +70,19 @@ The `config.default.js` file is used by default, but a similar `config.js` file 
 
 The client is written in **Node.js** and uses **[axios](https://www.npmjs.com/package/axios)**, **[shelljs](https://www.npmjs.com/package/shelljs)** and **[euberlog](https://www.npmjs.com/package/euberlog)** as external dependencies.
 
-There is also a [service](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/shareip.service) that executes the client.
+There is also a [service](https://github.com/eagletrt/ermes/blob/main/shell/shareip.service) that executes the client.
 
 In order to use the client:
-1) Clone this repository `git clone https://github.com/eagletrt/eagletrt-telemetria-ip`.
+1) Clone this repository `git clone https://github.com/eagletrt/ermes`.
 2) Move to the client `cd eagletrt-telemeta-ip/client/node`.
 3) Install the dependencies `npm install`.
 4) Only if you need to change the default options, copy the `config.default.js` file to `config.js` file by running `cp config.default.js config.js`.
 5) In order to start locally the client run `npm start` inside the `client` folder.
-6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/eagletrt-telemetria-ip/blob/main/shell/ipshare-node.service).
+6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/ermes/blob/main/shell/ipshare-node.service).
 
 ### Server
 
-The server is hosted by **Heroku** and is written with **Node.js** and **express**, with **handlebars** used as view engine. The link of the currently hosted server is [https://eagletrt-telemetria-ip.herokuapp.com](https://eagletrt-telemetria-ip.herokuapp.com).
+The server is hosted by **Heroku** and is written with **Node.js** and **express**, with **handlebars** used as view engine. The link of the currently hosted server is [https://eagletrt-ermes.herokuapp.com](https://eagletrt-ermes.herokuapp.com).
 
 The **frontend** apis are:
 - **GET /**: returns an html page showing the information of the machine **telemetria**.
@@ -125,4 +125,4 @@ While the result of a **GET**:
 
 ### Site and api
 
-Both the site and the api are served by the url https://eagletrt-telemetria-ip.herokuapp.com
+Both the site and the api are served by the url https://eagletrt-ermes.herokuapp.com

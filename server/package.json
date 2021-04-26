@@ -1,5 +1,5 @@
 {
-    "name": "eagletrt-telemetria-ip-server",
+    "name": "eagletrt-ermes-server",
     "version": "1.0.0",
     "description": "Receives and serves the ip of the raspberry of the telemetria",
     "main": "index.js",

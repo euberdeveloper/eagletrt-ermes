@@ -1,5 +1,5 @@
 {
-  "name": "eagletrt-telemetria-ip",
+  "name": "eagletrt-ermes",
   "version": "1.0.0",
   "description": "",
   "main": "server/index.js",
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eagletrt/eagletrt-telemetria-ip.git"
+    "url": "git+https://github.com/eagletrt/ermes.git"
   },
-  "author": "",
+  "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eagletrt/eagletrt-telemetria-ip/issues"
+    "url": "https://github.com/eagletrt/ermes/issues"
   },
-  "homepage": "https://github.com/eagletrt/eagletrt-telemetria-ip#readme"
+  "homepage": "https://github.com/eagletrt/ermes#readme"
 }
