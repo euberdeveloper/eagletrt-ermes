@@ -35,6 +35,17 @@ async function execAsync(command, options = {}) {
     });
 }
 
+function handleAxiosError(error) {
+    if (error.response) {
+        logger.warning('Data', error.response.data);
+        logger.warning('Status', error.response.status);
+      } else if (error.request) {
+        logger.warning('Request error');
+      } else {
+        logger.warning('Error', error.message);
+      }
+}
+
 /* PROVIDER FUNCTIONS */
 
 function getUser() {
@@ -44,7 +55,8 @@ function getUser() {
 async function getZerotierInfo() {
     try {
         const { stdout: result } = await execAsync(GET_ZEROTIER_INFO_COMMAND, { silent: true });
-        const [zerotierId, zerotierIp] = result.split('\n')[1].split(' ').slice(7);
+        const parts = result.split('\n')[1].split(' ').slice(7);
+        const [zerotierId, zerotierIp] = [parts[2], parts[8]];
         return { zerotierId, zerotierIp: zerotierIp.split('/')[0] };
     }
     catch (error) {
@@ -59,7 +71,8 @@ async function getNgrokUrl() {
         return response.data['tunnels'][0]['public_url'];
     }
     catch (error) {
-        logger.error('Error in getting port', error);
+        logger.error('Error in getting port');
+        handleAxiosError(error);
     }
 }
 
@@ -69,7 +82,8 @@ async function getPublicIP() {
         return response.data;
     }
     catch (error) {
-        logger.error('Error in getting public ip', error);
+        logger.error('Error in getting public ip');
+        handleAxiosError(error);
     }
 }
 
@@ -102,7 +116,8 @@ async function sendData(payload) {
         await axios.post(POST_PORT_URL, payload);
     }
     catch (error) {
-        logger.error('Error in sending data', error);
+        logger.error('Error in sending data');
+        handleAxiosError(error);
     }
 }
 
@@ -114,7 +129,7 @@ async function main() {
         const user = getUser();
 
         logger.info('Getting zerotier info', currentDateString());
-        const { zerotierId, zerotierIp } = await getZerotierInfo();
+        const zerotierResult = await getZerotierInfo();
 
         logger.info('Getting ngrok', currentDateString());
         const ngrokUrl = await getNgrokUrl();
@@ -125,8 +140,14 @@ async function main() {
         logger.info('Getting public ip', currentDateString());
         const publicIp = await getPublicIP();
 
-        logger.info('Sending data', currentDateString());
-        await sendData({ user, zerotierId, zerotierIp, ngrokUrl, localIp, publicIp });
+        try {
+            logger.info('Sending data', currentDateString());
+            await sendData({ user, zerotierId: zerotierResult.zerotierId, zerotierIp: zerotierResult.zerotierIp, ngrokUrl, localIp, publicIp });
+        }
+        catch (error) {
+            logger.error('Error in sending data');
+            handleAxiosError(error);
+        }
     }, RATE_IN_MILLISECONDS);
 }
 
