@@ -55,7 +55,7 @@ function getUser() {
 async function getZerotierInfo() {
     try {
         const { stdout: result } = await execAsync(GET_ZEROTIER_INFO_COMMAND, { silent: true });
-        const parts = result.split('\n')[1].split(' ').slice(7);
+        const parts = result.split('\n')[1].split(' ');
         const [zerotierId, zerotierIp] = [parts[2], parts[8]];
         return { zerotierId, zerotierIp: zerotierIp.split('/')[0] };
     }
