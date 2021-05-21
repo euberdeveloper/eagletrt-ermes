@@ -158,8 +158,8 @@ app.post('/api/machines/:machine', (req, res) => {
 
 // ROUTES EUTANASIA
 
-logger.debug('POST /api/eutanasia');
-app.post('/api/eutanasia', (_req, res) => {
+logger.debug('GET /api/eutanasia/receive-death');
+app.get('/api/eutanasia/receive-death', (_req, res) => {
     shouldDie = true;
     res.send();
 });
