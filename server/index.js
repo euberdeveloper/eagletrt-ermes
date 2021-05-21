@@ -161,6 +161,7 @@ app.post('/api/machines/:machine', (req, res) => {
 logger.debug('POST /api/eutanasia');
 app.post('/api/eutanasia', (_req, res) => {
     shouldDie = true;
+    res.send();
 });
 
 logger.debug('GET /api/eutanasia');
