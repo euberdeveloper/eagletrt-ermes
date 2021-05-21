@@ -93,6 +93,8 @@ The **api** apis are:
 - **GET /api/machines/:machine**: returns the information about the specified **machine**.
 - **GET /api/machines/:machine/:field**: returns the value of the specified **field** of the specified **machine**.
 - **POST /api/machines/:machine**: upserts the **machine** with the specified information.
+- **POST /api/eutanasia**: sets the internal value *"shouldDie"* to `true`.
+- **GET /api/eutanasia**: returns the value of *"shouldDie"* ad sets it to `false`.
 
 In particular the **POST** body is something such as:
 ```json

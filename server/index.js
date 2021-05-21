@@ -16,6 +16,7 @@ const app = express();
 // DATA
 
 let data = {};
+let shouldDie = false;
 
 function getHostnameAndPort(url) {
     let result = { hostname: null, port: null };
@@ -75,6 +76,9 @@ logger.hr();
 // ROUTES
 
 logger.info('Add routes...');
+
+
+// ROUTES ERMES
 
 logger.debug('GET /api/machines');
 app.get('/api/machines', (_req, res) => {
@@ -151,6 +155,21 @@ app.post('/api/machines/:machine', (req, res) => {
 
     return res.send();
 });
+
+// ROUTES EUTANASIA
+
+logger.debug('POST /api/eutanasia');
+app.post('/api/eutanasia', (_req, res) => {
+    shouldDie = true;
+});
+
+logger.debug('GET /api/eutanasia');
+app.get('/api/eutanasia', (_req, res) => {
+    const value = shouldDie;
+    shouldDie = false;
+    res.send(value);
+});
+
 
 logger.success('Routes added');
 
