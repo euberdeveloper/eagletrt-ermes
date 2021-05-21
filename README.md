@@ -12,7 +12,7 @@ When the raspberry of the telemetry is connected to the internet, it has not a p
 
 We firstly used a reverse ssh by using a server with public IP address. The problem was that after a while that server was not anymore available to us, hence we started using **ngrok**. 
 
-You can install ngrok from [here](https://ngrok.com/download) and it is needed to be installed only on the raspberry side.
+You can install ngrok from [here](https://ngrok.com/download) and it is needed to be installed only on the raspberry side. We place it in the `/usr/local/bin` folder and before starting the systemctl service you should first login to ngrok with `./ngrok authtoken [TOKEN]`, that you find loggin in the ngrok site.
 
 The ngrok is automatically started with a [service](https://github.com/eagletrt/ermes/blob/main/shell/ngrok.service) and opens an ssh tunnel with a certain **hostname** and **port**. (**Note:** the port is usually **not** 22, hence you should use the `-p PORT` parameter of the `ssh` command).
 
