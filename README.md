@@ -78,7 +78,7 @@ In order to use the client:
 3) Install the dependencies `npm install`.
 4) Only if you need to change the default options, copy the `config.default.js` file to `config.js` file by running `cp config.default.js config.js`.
 5) In order to start locally the client run `npm start` inside the `client` folder.
-6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/ermes/blob/main/shell/ipshare.service).
+6) In order to run it as a **service**, refer to [this file](https://github.com/eagletrt/ermes/blob/main/shell/ipshare.service). (Note: it is thought to be used on Ubuntu).
 
 ### Server
 
