@@ -74,7 +74,7 @@ There is also a [service](https://github.com/eagletrt/ermes/blob/main/shell/shar
 
 In order to use the client:
 1) Clone this repository `git clone https://github.com/eagletrt/ermes`.
-2) Move to the client `cd eagletrt-telemeta-ip/client/node`.
+2) Move to the client `cd ermes/client/node`.
 3) Install the dependencies `npm install`.
 4) Only if you need to change the default options, copy the `config.default.js` file to `config.js` file by running `cp config.default.js config.js`.
 5) In order to start locally the client run `npm start` inside the `client` folder.
